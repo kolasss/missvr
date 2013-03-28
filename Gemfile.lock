@@ -111,6 +111,7 @@ GEM
     moped (1.4.4)
     multi_json (1.7.2)
     nokogiri (1.5.9)
+    oj (2.0.10)
     origin (1.0.11)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
@@ -215,8 +216,9 @@ DEPENDENCIES
   jquery-rails
   mongoid (>= 3.1.2)
   mongoid-rspec (>= 1.7.0)
+  oj
   quiet_assets (>= 1.0.2)
-  rails (= 3.2.13)
+  rails (~> 3.2.13)
   rolify (>= 3.2.0)
   rspec-rails (>= 2.12.2)
   sass-rails (~> 3.2.3)

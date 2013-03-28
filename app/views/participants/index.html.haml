@@ -1,0 +1,25 @@
+%h1 Listing participants
+
+%table
+  %tr
+    %th Vk
+    %th Image src
+    %th City
+    %th Text
+    %th
+    %th
+    %th
+
+  - @participants.each do |participant|
+    %tr
+      %td= participant.vk_id
+      %td= participant.image_src
+      %td= participant.city
+      %td= participant.text
+      %td= link_to 'Show', participant
+      %td= link_to 'Edit', edit_participant_path(participant)
+      %td= link_to 'Destroy', participant, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Participant', new_participant_path

@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3">
+      <!--Sidebar content-->
+
+      Search: <input ng-model="query">
+      Sort by:
+      <select ng-model="orderProp">
+        <option value="name">Alphabetical</option>
+        <option value="age">Newest</option>
+      </select>
+
+    </div>
+    <div class="span9">
+      <!--Body content-->
+
+      <ul class="misses">
+        <li ng-repeat="woman in participants | filter:query | orderBy:orderProp" class="thumbnail">
+          <!-- <a href="" class="thumb"><img ng-src="{{woman.vk_id}}"></a>
+          <a href="">{{woman.image_src}}</a> -->
+          <!-- <img ng-src="{{woman.image_src}}"> -->
+          <p>{{woman.vk_id}}</p>
+          <p>{{woman.text}}</p>
+          <p>{{woman.image_src.0}}</p>
+          <p ng-repeat="img in woman.image_src">{{img}}</p>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>

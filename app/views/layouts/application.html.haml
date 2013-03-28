@@ -1,10 +1,11 @@
 !!!
-%html
+%html{"ng-app" => "missvr"}
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
       %title= content_for?(:title) ? yield(:title) : "Missvr"
       %meta{:content => content_for?(:description) ? yield(:description) : "Missvr", :name => "description"}
         = stylesheet_link_tag "application", :media => "all"
+        = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"
         = javascript_include_tag "application"
         = csrf_meta_tags
         = yield(:head)

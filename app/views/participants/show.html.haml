@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Vk:
+  = @participant.vk_id
+%p
+  %b Image src:
+  = @participant.image_src
+%p
+  %b City:
+  = @participant.city
+%p
+  %b Text:
+  = @participant.text
+
+= link_to 'Edit', edit_participant_path(@participant)
+\|
+= link_to 'Back', participants_path

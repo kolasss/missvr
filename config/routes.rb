@@ -1,4 +1,10 @@
 Missvr::Application.routes.draw do
+  resources :cities
+
+
+  resources :participants
+
+
   authenticated :user do
     root :to => 'home#index'
   end

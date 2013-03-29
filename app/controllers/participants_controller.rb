@@ -1,12 +1,20 @@
 class ParticipantsController < ApplicationController
+  authorize_resource
   # GET /participants
   # GET /participants.json
   def index
-    @participants = Participant.all.limit(10)
-
+    if params[:top_id] == "reposts"
+      @participants = Participant.all.slice(likes: -1).desc("likes.0.reposts")
+    elsif params[:top_id] == "likes"
+      @participants = Participant.all.slice(likes: -1).desc("likes.0.likes")
+    else
+      @participants = Participant.all.slice(likes: -1).limit(10)
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @participants }
+      format.json { render json: Oj.dump(@participants, :mode => :compat) }
+      # format.json { render json: @participants }
     end
   end
 

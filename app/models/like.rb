@@ -10,4 +10,6 @@ class Like
   embedded_in :participant
 
   attr_accessible :likes, :reposts
+
+  default_scope order_by(:created_at => :desc)
 end

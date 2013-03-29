@@ -1,7 +1,6 @@
 <div class="container-fluid">
   <div class="row-fluid">
-    <div class="span3">
-      <!--Sidebar content-->
+    <!-- <div class="span3">
 
       Search: <input ng-model="query">
       Sort by:
@@ -10,21 +9,48 @@
         <option value="age">Newest</option>
       </select>
 
-    </div>
-    <div class="span9">
+    </div> -->
+    <div class="span12">
       <!--Body content-->
+      <h3>Top 10 by {{top_id}}</h3>
 
+      <p>Данные на {{participants[0].likes[0].created_at | date:'dd.MM.yyyy HH:mm:ss'}}</p>
       <ul class="misses">
-        <li ng-repeat="woman in participants | filter:query | orderBy:orderProp" class="thumbnail">
-          <!-- <a href="" class="thumb"><img ng-src="{{woman.vk_id}}"></a>
-          <a href="">{{woman.image_src}}</a> -->
-          <!-- <img ng-src="{{woman.image_src}}"> -->
-          <p>{{woman.vk_id}}</p>
+        <!-- <li ng-repeat="woman in participants | filter:query | orderBy:orderProp" class="thumbnail"> -->
+        <li ng-repeat="woman in participants| startFrom:currentPage*pageSize | limitTo:pageSize" class="thumbnail">
+          <span class="index">{{currentPage*pageSize+$index+1}}</span>
+          <div class="photos">
+            <div ng-repeat="img in woman.image_src">
+              <img class="thumb" ng-src="{{img}}">
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <!-- <p>{{woman.vk_id}}</p> -->
           <p>{{woman.text}}</p>
-          <p>{{woman.image_src.0}}</p>
-          <p ng-repeat="img in woman.image_src">{{img}}</p>
+          <p>Likes: {{woman.likes[0].likes}}</p>
+          <p>Reposts: {{woman.likes[0].reposts}}</p>
+          <!-- <p>{{woman.likes[0].created_at}}</p> -->
+          
         </li>
       </ul>
+
+      <td colspan="6">
+          <div class="pagination pull-right">
+              <ul>
+                  <li ng-class="{disabled: currentPage == 0}">
+                      <a href ng-click="prevPage()">« Prev</a>
+                  </li>
+                  <li ng-repeat="n in range(numberOfPages())"
+                      ng-class="{active: n == currentPage}"
+                  ng-click="setPage()">
+                      <a href ng-bind="n + 1">1</a>
+                  </li>
+                  <li ng-class="{disabled: currentPage == numberOfPages() - 1}">
+                      <a href ng-click="nextPage()">Next »</a>
+                  </li>
+              </ul>
+          </div>
+      </td>
 
     </div>
   </div>

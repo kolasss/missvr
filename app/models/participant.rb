@@ -15,6 +15,9 @@ class Participant
 
   attr_accessible :vk_id, :image_src, :text
 
+  # scope :topreposts, order_by(:likes.reposts => :desc)
+  # scope :by_likes_size, order_by('likes_count DESC')
+
   def update
   	require 'open-uri'
 

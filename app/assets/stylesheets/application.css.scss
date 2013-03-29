@@ -34,10 +34,11 @@
     padding-top: 15px;
     padding-left: 10px;
     overflow:auto;
+    position:relative;
   }
 
   .index {
-    margin-right: 5px;
+    margin-right: 1em;
     float: left;
     font-weight: bold;
     font-size: 1.2em;
@@ -54,6 +55,17 @@
     }
     img:hover {
       cursor: pointer;
+    }
+  }
+  .info {
+    bottom: 1em;
+    right: 1em;
+    position: absolute;
+    span {
+      border: 1px solid #B0B0B0 ;
+      margin-left: 0.8em;
+      padding: 0.3em;
+      background-color: #66CCFF;
     }
   }
 }

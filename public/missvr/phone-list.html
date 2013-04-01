@@ -1,35 +1,38 @@
 <div class="container-fluid">
   <div class="row-fluid">
-    <!-- <div class="span3">
+    <div class="span4">
 
-      Search: <input ng-model="query">
-      Sort by:
-      <select ng-model="orderProp">
-        <option value="name">Alphabetical</option>
-        <option value="age">Newest</option>
+      <!-- Search: <input ng-model="query">
+      Sort by: -->
+      <!-- <select ng-model="orderProp">
+        <option value="-likes[0].likes">Likes</option>
+        <option value="-likes[0].reposts">Reposts</option>
+      </select> -->
+
+      <select ng-model="mycity" ng-options="c.name for c in cities">
+        <option value="">Все</option>
       </select>
-
-    </div> -->
-    <div class="span12">
+    </div>
+    <!-- <div class="span12"> -->
       <!--Body content-->
       <h3>Top 10 by {{top_id}}</h3>
 
       <p>Данные на {{participants[0].likes[0].created_at | date:'dd.MM.yyyy HH:mm:ss'}}</p>
       <ul class="misses">
-        <!-- <li ng-repeat="woman in participants | filter:query | orderBy:orderProp" class="thumbnail"> -->
-        <li ng-repeat="woman in participants| startFrom:currentPage*pageSize | limitTo:pageSize" class="thumbnail">
+        <!-- <li ng-repeat="woman in participants| startFrom:currentPage*pageSize | limitTo:pageSize | filter:query | orderBy:orderProp" class="thumbnail"> -->
+        <li ng-repeat="woman in filterByCity(participants, mycity) | startFrom:currentPage*pageSize | limitTo:pageSize | orderBy:predicate:reverse" class="thumbnail">
           <span class="index">{{currentPage*pageSize+$index+1}}</span>
           <div class="photos">
             <div ng-repeat="img in woman.image_src">
-              <img class="thumb" ng-src="{{img}}">
+              <img class="thumb" ng-src="{{img}}" ng-click="showbig(woman.image_src, $index)">
             </div>
             <div class="clearfix"></div>
           </div>
           <!-- <p>{{woman.vk_id}}</p> -->
           <p>{{woman.text}}</p>
           <div class="info">
-            <span>Likes: {{woman.likes[0].likes}}</span>
-            <span>Reposts: {{woman.likes[0].reposts}}</span>
+            <span ng-click="predicate = '-likes[0].likes'">Likes: {{woman.likes[0].likes}}</span>
+            <span ng-click="predicate = '-likes[0].reposts'">Reposts: {{woman.likes[0].reposts}}</span>
           </div>
           <!-- <p>{{woman.likes[0].created_at}}</p> -->
           
@@ -54,6 +57,6 @@
           </div>
       </td>
 
-    </div>
+    <!-- </div> -->
   </div>
 </div>

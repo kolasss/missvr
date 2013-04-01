@@ -35,6 +35,8 @@
     padding-left: 10px;
     overflow:auto;
     position:relative;
+    border-radius: 0;
+    margin-top: 9px;
   }
 
   .index {
@@ -62,10 +64,35 @@
     right: 1em;
     position: absolute;
     span {
-      border: 1px solid #B0B0B0 ;
+      border: 1px solid #DDDDDD ;
       margin-left: 0.8em;
       padding: 0.3em;
       background-color: #66CCFF;
     }
+  }
+}
+.pagination {
+  ul {
+    li {
+      a{
+        border-radius: 0 !important;
+      }
+    }
+  }
+}
+.imgmodal {
+  border: 2px solid #DDDDDD;
+  left: 50%;
+  outline: medium none;
+  position: fixed;
+  top: 10%;
+  z-index: 1050;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  img:hover {
+    cursor: pointer;
   }
 }

@@ -2,7 +2,7 @@
 
 /* App Module */
 
-angular.module('missvr', ['missFilters', 'missServices'])
+angular.module('missvr', ['missFilters', 'missServices', 'ui.bootstrap'])
 	.config(['$httpProvider', function(provider){
     provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
   }])

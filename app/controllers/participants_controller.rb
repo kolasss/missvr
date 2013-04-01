@@ -3,14 +3,20 @@ class ParticipantsController < ApplicationController
   # GET /participants
   # GET /participants.json
   def index
-    if params[:top_id] == "reposts"
-      @participants = Participant.all.slice(likes: -1).desc("likes.0.reposts")
-    elsif params[:top_id] == "likes"
-      @participants = Participant.all.slice(likes: -1).desc("likes.0.likes")
-    else
-      @participants = Participant.all.slice(likes: -1).limit(10)
-    end
+    # if params[:top_id] == "reposts"
+    #   @participants = Participant.all.slice(likes: -1).desc("likes.0.reposts")
+    # elsif params[:top_id] == "likes"
+    #   @participants = Participant.all.slice(likes: -1).desc("likes.0.likes")
+    # else
+      @participants = Participant.all.slice(likes: -1)
+    # end
     
+    # @cities = City.all
+
+    # @result = {}
+    # @result['participants'] = @participants
+    # @result['cities'] = @cities
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: Oj.dump(@participants, :mode => :compat) }

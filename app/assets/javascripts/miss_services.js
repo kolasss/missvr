@@ -8,6 +8,11 @@ angular.module('missServices', ['ngResource'])
 
 	  });
 	})
+  .factory('City', function($resource){
+    return $resource('cities.json', {}, {
+
+    });
+  })
   .factory('Movie', function($resource){
     return $resource('movie/:movie_id.json', {}, {
       show: { method: 'GET' },

@@ -1,8 +1,9 @@
 class CitiesController < ApplicationController
+  authorize_resource
   # GET /cities
   # GET /cities.json
   def index
-    @cities = City.all
+    @cities = City.all.asc("name")
 
     respond_to do |format|
       format.html # index.html.erb

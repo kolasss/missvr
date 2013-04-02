@@ -8,10 +8,13 @@
   = @participant.image_src
 %p
   %b City:
-  = @participant.city
+  = @participant.city.name
 %p
   %b Text:
   = @participant.text
+%p
+  %b Enabled:
+  = @participant.enabled
 
 = link_to 'Edit', edit_participant_path(@participant)
 \|

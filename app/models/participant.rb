@@ -4,6 +4,7 @@ class Participant
   field :vk_id, type: Integer
   field :image_src, type: String, :default => ""
   field :text, type: String, :default => ""
+  field :enabled, type: Boolean, default: true
 
   validates :vk_id, uniqueness: true, presence: true
   validates :image_src, presence: true
@@ -13,12 +14,12 @@ class Participant
 
   index({ :vk_id => 1 }, { :unique => true, background: true })
 
-  attr_accessible :vk_id, :image_src, :text
+  attr_accessible :vk_id, :image_src, :text, :enabled
 
   # scope :topreposts, order_by(:likes.reposts => :desc)
   # scope :by_likes_size, order_by('likes_count DESC')
 
-  def update
+  def update_from_vk
   	require 'open-uri'
 
   	# offset = 0
@@ -74,11 +75,11 @@ class Participant
           end
 
           #city
-          if city_name = text[/я из \S+\,/]
+          if city_name = text[/я из \S+[\,\.]/]
             city_name[0..4] = ""
             city_name[-1] = ""
           else
-            city_name = "undefined"
+            city_name = "неизвестно "
           end
 
           my_city = City.where(vk_name: city_name).first
@@ -87,7 +88,7 @@ class Participant
           part = Participant.where(vk_id: vk_id).first
           if !part
             part = Participant.new(vk_id: vk_id, text: text, image_src: image_src)
-            part.city = my_city if image_src.size == 2
+            part.city = my_city
             part.save
           end
           

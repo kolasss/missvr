@@ -4,9 +4,9 @@ class ParticipantsController < ApplicationController
   # GET /participants.json
   def index
     # if params[:top_id] == "reposts"
-    #   @participants = Participant.all.slice(likes: -1).desc("likes.0.reposts")
+    #   @participants = Participant.all.slice(likes: -1).desc("likes.reposts")
     # elsif params[:top_id] == "likes"
-    #   @participants = Participant.all.slice(likes: -1).desc("likes.0.likes")
+    #   @participants = Participant.all.slice(likes: -1).desc("likes.likes")
     # else
       @participants = Participant.all.slice(likes: -1)
     # end

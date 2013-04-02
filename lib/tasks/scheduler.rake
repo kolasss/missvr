@@ -2,7 +2,7 @@ desc "This task is called by the Heroku scheduler add-on"
 
 task :update_feed => :environment do
   puts "Updating info about participants"
-  Participant.update
+  Participant.update_from_vk
   puts "done."
 end
 

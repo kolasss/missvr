@@ -6,6 +6,7 @@
     %th Image src
     %th City
     %th Text
+    %th Enabled
     %th
     %th
     %th
@@ -14,8 +15,9 @@
     %tr
       %td= participant.vk_id
       %td= participant.image_src
-      %td= participant.city
+      %td= participant.city.name
       %td= participant.text
+      %td= participant.enabled
       %td= link_to 'Show', participant
       %td= link_to 'Edit', edit_participant_path(participant)
       %td= link_to 'Destroy', participant, :method => :delete, :data => { :confirm => 'Are you sure?' }

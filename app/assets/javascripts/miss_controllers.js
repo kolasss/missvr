@@ -2,30 +2,44 @@
 
 /* Controllers */
 
-function MissListCtrl($scope, $routeParams, $dialog, Miss, City) {
-  $scope.participants = Miss.query({
-        top_id : $routeParams.top_id
-    }, function(data) {
-  	for (var i = 0; i < data.length; i++) {
-  		data[i].image_src = JSON.parse(data[i].image_src)
-  	};
+function MissListCtrl($scope, $routeParams, $dialog, Miss, City, $filter) {
+  // $scope.participants = Miss.query({
+  //       top_id : $routeParams.top_id
+  //   }, function(data) {
+  // 	for (var i = 0; i < data.length; i++) {
+  // 		data[i].image_src = JSON.parse(data[i].image_src)
+  // 	};
+  // });
+  $scope.filteredparticipants = [];
+
+  $scope.participants = Miss.query(function(data) {
+    // console.log(data)
+    for (var i = 0; i < data.length; i++) {
+      data[i].image_src = JSON.parse(data[i].image_src)
+    };
+    // $scope.search();
+    $scope.filterByCity();
+
   });
+
   $scope.cities = City.query();
 
-  $scope.top_id = $routeParams.top_id;
+  /* changing order */
+  $scope.orderProp = '-likes[0].reposts';
+  $scope.orderName = "Reposts";
+  $scope.changeOrder = function() {
+    if ($scope.orderProp == '-likes[0].reposts') {
+      $scope.orderProp = "-likes[0].likes";
+      $scope.orderName = "Likes";
+    } else {
+      $scope.orderProp = '-likes[0].reposts';
+      $scope.orderName = "Reposts";
+    }
+  }
 
   /* pagination */
   $scope.currentPage = 0;
   $scope.pageSize = 10;
-
-  $scope.numberOfPages=function(participants){
-      if (participants == undefined) {
-        participants = $scope.participants
-      }
-      return Math.ceil(participants.length/$scope.pageSize);                
-  }
-
-  // $scope.orderProp = '-likes[0].reposts';
 
   $scope.range = function (start, end) {
       var ret = [];
@@ -39,6 +53,13 @@ function MissListCtrl($scope, $routeParams, $dialog, Miss, City) {
       return ret;
   };
   
+  $scope.numberOfPages = function(){
+      // if (participants == undefined) {
+      //   participants = $scope.participants
+      // }
+      return Math.ceil($scope.filteredparticipants.length/$scope.pageSize);                
+  }
+
   $scope.prevPage = function () {
       if ($scope.currentPage > 0) {
           $scope.currentPage--;
@@ -46,9 +67,12 @@ function MissListCtrl($scope, $routeParams, $dialog, Miss, City) {
   };
   
   $scope.nextPage = function () {
-      if ($scope.currentPage < $scope.participants.length - 1) {
+      // console.log($scope.currentPage);
+      // console.log($scope.numberOfPages());
+      if ($scope.currentPage < $scope.numberOfPages()-1) {
           $scope.currentPage++;
       }
+      window.scrollTo(0, 0);
   };
   
   $scope.setPage = function () {
@@ -77,23 +101,22 @@ function MissListCtrl($scope, $routeParams, $dialog, Miss, City) {
   };
 
   /* filter by city */
-  $scope.filterByCity = function(participants, query) {
-    var filteredparticipants = [];
-    // console.log(query);
-    if (query != undefined) {
-      angular.forEach(participants, function(part) {
-        if (part.city_id == query._id) {
-          filteredparticipants.push(part);
+  $scope.filterByCity = function () {
+    $scope.filteredparticipants = $filter('filter')($scope.participants, function (item) {
+      if ($scope.mycity != undefined) {
+        if (item.city_id == $scope.mycity._id && item.enabled) {
+          return true;
+        } else {
+          return false;
         }
-      });
-    } else {
-      filteredparticipants = participants;
-    }
-
-    // $scope.numberOfPages = $scope.numberOfPages(filteredparticipants);
-
-    return filteredparticipants;
+      } else {
+        return item.enabled;
+      }
+    });
+    $scope.currentPage = 0;
+    $scope.numberOfPages();
   };
+
 }
 
 /* controller for modal with big image */

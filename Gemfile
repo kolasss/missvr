@@ -9,7 +9,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+# gem 'jquery-rails'
 
 gem "mongoid", ">= 3.1.2"
 gem "haml-rails", ">= 0.4"

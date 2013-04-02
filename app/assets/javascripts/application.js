@@ -13,8 +13,3 @@
 //= require angular-resource.min.js
 //= require ui-bootstrap-0.2.0.min.js
 //= require_tree .
-
-
-//= require jquery
-//= require jquery_ujs
-//= require bootstrap

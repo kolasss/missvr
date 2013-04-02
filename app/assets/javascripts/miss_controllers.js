@@ -119,6 +119,8 @@ function MissListCtrl($scope, $routeParams, $dialog, Miss, City, $filter) {
 
 }
 
+MissListCtrl.$inject = ['$scope', '$routeParams', '$dialog', 'Miss', 'City', '$filter'];
+
 /* controller for modal with big image */
 function ImageModalCtrl($scope, dialog, img, ind) {
     $scope.img = img;
@@ -131,3 +133,4 @@ function ImageModalCtrl($scope, dialog, img, ind) {
         }
     };
 }
+ImageModalCtrl.$inject = ['$scope', 'dialog', 'img', 'ind'];

@@ -3,13 +3,13 @@
 /* Services */
 
 angular.module('missServices', ['ngResource'])
-	.factory('Miss', function($resource){
+	.factory('Miss', ['$resource', function($resource){
 	  return $resource('participants.json', {}, {
 
 	  });
-	})
-  .factory('City', function($resource){
+	}])
+  .factory('City', ['$resource', function($resource){
     return $resource('cities.json', {}, {
 
     });
-  });
+  }]);

@@ -34,6 +34,11 @@
         </ul>
     </div>
 
+    <div class="clearfix"></div>
+    <div id="loader" ng-show="loading">
+      <img src="/assets/hearts.gif">
+    </div>
+
     <ul class="misses">
       <li ng-repeat="woman in filteredparticipants | orderBy:orderProp | startFrom:currentPage*pageSize | limitTo:pageSize" class="thumbnail">
         <span class="index">{{currentPage*pageSize+$index+1}}</span>

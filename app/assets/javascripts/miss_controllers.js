@@ -11,6 +11,7 @@ function MissListCtrl($scope, $routeParams, $dialog, Miss, City, $filter) {
   // 	};
   // });
   $scope.filteredparticipants = [];
+  $scope.loading = true;
 
   $scope.participants = Miss.query(function(data) {
     // console.log(data)
@@ -19,7 +20,7 @@ function MissListCtrl($scope, $routeParams, $dialog, Miss, City, $filter) {
     };
     // $scope.search();
     $scope.filterByCity();
-
+    $scope.loading = false;
   });
 
   $scope.cities = City.query();

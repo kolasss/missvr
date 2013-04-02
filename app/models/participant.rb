@@ -14,7 +14,7 @@ class Participant
 
   index({ :vk_id => 1 }, { :unique => true, background: true })
 
-  attr_accessible :vk_id, :image_src, :text, :enabled
+  attr_accessible :vk_id, :image_src, :text, :enabled, :city_id
 
   # scope :topreposts, order_by(:likes.reposts => :desc)
   # scope :by_likes_size, order_by('likes_count DESC')

@@ -71,6 +71,7 @@ class ParticipantsController < ApplicationController
   # PUT /participants/1.json
   def update
     @participant = Participant.find(params[:id])
+    # @participant.city = City.find(params[:participant][:city])
 
     respond_to do |format|
       if @participant.update_attributes(params[:participant])

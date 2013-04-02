@@ -5,7 +5,7 @@
     = f.input :vk_id
     = f.input :image_src
     / = f.association :city
-    = f.input :city, :collection => City.all.asc("name")
+    = f.input :city_id, :collection => City.all.asc("name")
     = f.input :text
     = f.input :enabled, as: :radio_buttons 
 

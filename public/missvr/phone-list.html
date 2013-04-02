@@ -3,13 +3,13 @@
       
       <!-- Search: <input ng-model="query"> -->
     <div class="pull-right">
-      Sort by:
+      Sort by: {{orderName}}
       <!-- <select ng-model="orderProp">
         <option value="-likes[0].likes">Likes</option>
         <option value="-likes[0].reposts">Reposts</option>
       </select> -->
-      <button ng-click="changeOrder()" class="btn orderbtn">{{orderName}}</button>
-      City:
+      <button ng-click="changeOrder()" class="btn btn-mini btn-info orderbtn"><i class="icon-random"></i></button>
+      Город:
       <select ng-model="mycity" ng-change="filterByCity()" ng-options="c.name for c in cities">
         <option value="">Все</option>
       </select>

@@ -15,7 +15,7 @@
     %tr
       %td= participant.vk_id
       %td= participant.image_src
-      %td= participant.city.name
+      %td= participant.city.name if participant.city
       %td= participant.text
       %td= participant.enabled
       %td= link_to 'Show', participant

@@ -3,25 +3,25 @@
       
       <!-- Search: <input ng-model="query"> -->
     <div class="pull-right">
-      Sort by: {{orderName}}
+      Отсортированно по {{orderName}}
       <!-- <select ng-model="orderProp">
         <option value="-likes[0].likes">Likes</option>
         <option value="-likes[0].reposts">Reposts</option>
       </select> -->
       <button ng-click="changeOrder()" class="btn btn-mini btn-info orderbtn"><i class="icon-random"></i></button>
-      Город:
+      Населенный пункт:
       <select ng-model="mycity" ng-change="filterByCity()" ng-options="c.name for c in cities" class="cityselect">
         <option value="">Все</option>
       </select>
 
     </div>
 
-    <p class="clearfix">Данные на {{participants[0].likes[0].created_at | date:'dd.MM.yyyy HH:mm:ss'}}</p>
+    <p class="clearfix">Данные на {{participants[0].likes[0].created_at | date:'dd.MM.yyyy HH:mm'}}</p>
 
     <div class="pagination pull-right">
         <ul>
             <li ng-class="{disabled: currentPage == 0}">
-                <a href ng-click="prevPage()">« Prev</a>
+                <a href ng-click="prevPage()">« Пред</a>
             </li>
             <li ng-repeat="n in range(numberOfPages())"
                 ng-class="{active: n == currentPage}"
@@ -29,7 +29,7 @@
                 <a href ng-bind="n + 1">1</a>
             </li>
             <li ng-class="{disabled: currentPage == numberOfPages() - 1}">
-                <a href ng-click="nextPage()">Next »</a>
+                <a href ng-click="nextPage()">След »</a>
             </li>
         </ul>
     </div>
@@ -47,8 +47,8 @@
         <p class="hide">{{woman.vk_id}}</p>
         <p>{{woman.text}}</p>
         <div class="info">
-          <span ng-click="sort_by('likes[0].likes')">Likes: {{woman.likes[0].likes}}</span>
-          <span ng-click="sort_by('likes[0].reposts')">Reposts: {{woman.likes[0].reposts}}</span>
+          <span ng-click="sort_by('likes[0].likes')">Лайки: {{woman.likes[0].likes}}</span>
+          <span ng-click="sort_by('likes[0].reposts')">Репосты: {{woman.likes[0].reposts}}</span>
         </div>
         <!-- <p>{{woman.likes[0].created_at}}</p> -->
         
@@ -58,7 +58,7 @@
     <div class="pagination pull-right">
         <ul>
             <li ng-class="{disabled: currentPage == 0}">
-                <a href ng-click="prevPage()">« Prev</a>
+                <a href ng-click="prevPage()">« Пред</a>
             </li>
             <li ng-repeat="n in range(numberOfPages())"
                 ng-class="{active: n == currentPage}"
@@ -66,7 +66,7 @@
                 <a href ng-bind="n + 1">1</a>
             </li>
             <li ng-class="{disabled: currentPage == numberOfPages() - 1}">
-                <a href ng-click="nextPage()">Next »</a>
+                <a href ng-click="nextPage()">След »</a>
             </li>
         </ul>
     </div>

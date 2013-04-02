@@ -26,14 +26,14 @@ function MissListCtrl($scope, $routeParams, $dialog, Miss, City, $filter) {
 
   /* changing order */
   $scope.orderProp = '-likes[0].reposts';
-  $scope.orderName = "Reposts";
+  $scope.orderName = "репостам";
   $scope.changeOrder = function() {
     if ($scope.orderProp == '-likes[0].reposts') {
       $scope.orderProp = "-likes[0].likes";
-      $scope.orderName = "Likes";
+      $scope.orderName = "лайкам";
     } else {
       $scope.orderProp = '-likes[0].reposts';
-      $scope.orderName = "Reposts";
+      $scope.orderName = "репостам";
     }
   }
 

@@ -19,7 +19,7 @@ class Participant
   # scope :topreposts, order_by(:likes.reposts => :desc)
   # scope :by_likes_size, order_by('likes_count DESC')
 
-  def update_from_vk
+  def self.update_from_vk
   	require 'open-uri'
 
   	# offset = 0

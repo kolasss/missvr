@@ -64,6 +64,7 @@ function MissListCtrl($scope, $routeParams, $dialog, Miss, City, $filter) {
       if ($scope.currentPage > 0) {
           $scope.currentPage--;
       }
+      window.scrollTo(0, 0);
   };
   
   $scope.nextPage = function () {
@@ -77,6 +78,7 @@ function MissListCtrl($scope, $routeParams, $dialog, Miss, City, $filter) {
   
   $scope.setPage = function () {
       $scope.currentPage = this.n;
+      window.scrollTo(0, 0);
   };
 
   /*modal with image */

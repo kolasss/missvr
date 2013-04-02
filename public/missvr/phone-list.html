@@ -10,7 +10,7 @@
       </select> -->
       <button ng-click="changeOrder()" class="btn btn-mini btn-info orderbtn"><i class="icon-random"></i></button>
       Город:
-      <select ng-model="mycity" ng-change="filterByCity()" ng-options="c.name for c in cities">
+      <select ng-model="mycity" ng-change="filterByCity()" ng-options="c.name for c in cities" class="cityselect">
         <option value="">Все</option>
       </select>
 

@@ -77,18 +77,20 @@ class Participant
 
           #city
           # if city_name = text[/я из \S+[\,\.]/]
-          if city_name = text[/я из \S+\s*\S*[\,\.]/]
+          if city_name = text[/я из \p{L}+(?:[\.\-\s]*\p{L}*){0,3}[\,\.]/]
             city_name[0..4] = ""
             city_name[-1] = ""
+            city_name = "нет данных " if city_name.length < 2
           else
-            city_name = "неизвестно "
+            city_name = "нет данных "
           end
 
           my_city = City.where(vk_name: city_name).first
-          my_city = City.create(vk_name: city_name, name: city_name[0...-1]) if !my_city
+          # my_city = City.create(vk_name: city_name, name: city_name[0...-1]) if !my_city
 
           part = Participant.where(vk_id: vk_id).first
           if !part
+            my_city = City.create(vk_name: city_name, name: city_name[0...-1]) if !my_city
             part = Participant.new(vk_id: vk_id, text: text, image_src: image_src)
             part.city = my_city
             part.save

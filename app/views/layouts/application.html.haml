@@ -2,7 +2,7 @@
 %html{"ng-app" => "missvr"}
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title= content_for?(:title) ? yield(:title) : "Missvr"
+      %title{"ng:bind-template" => "{{pageTitle}}"}= content_for?(:title) ? yield(:title) : "Missvr"
       %meta{:content => content_for?(:description) ? yield(:description) : "Missvr", :name => "description"}
         = stylesheet_link_tag "application", :media => "all"
         = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"
@@ -10,7 +10,7 @@
         = csrf_meta_tags
         = yield(:head)
   %body{:class => "#{controller_name} #{action_name}"}
-    .navbar.navbar-fixed-top
+    .navbar
       %nav.navbar-inner
         .container
           = render 'layouts/navigation'
@@ -22,5 +22,6 @@
               = render 'layouts/messages'
               = yield
           %footer
+            = link_to 'Мисс Виртуальная Россия - 2013', "http://www.missvirtualrussia.ru/"
       / ! end of .container
     / ! end of #main

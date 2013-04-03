@@ -4,8 +4,8 @@ class Like
   field :reposts, type: Integer, :default => 0
   include Mongoid::Timestamps::Created
 
-  validates :likes, presence: true, :numericality => { :only_integer => true, :greater_than => 0 }
-  validates :reposts, presence: true, :numericality => { :only_integer => true, :greater_than => 0 }
+  validates :likes, presence: true, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
+  validates :reposts, presence: true, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
   
   embedded_in :participant
 

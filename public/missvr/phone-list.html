@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div ng:init="$root.pageTitle = 'Мисс Виртуальная Россия'" class="container-fluid">
   <div class="row-fluid">
       
       <!-- Search: <input ng-model="query"> -->
@@ -48,9 +48,9 @@
           </div>
           <div class="clearfix"></div>
         </div>
-        <p class="hide">{{woman.vk_id}}</p>
+        <!-- <p class="hide">{{woman.vk_id}}</p> -->
         <p>{{woman.text}}</p>
-        <a href="#{{woman.vk_id}}">VK.com</a>
+        <a href="http://vk.com/missvirtualrussia?w=wall-50665538_{{woman.vk_id}}" target="_blank">В контакте</a>
         <div class="info">
           <span ng-click="sort_by('likes[0].likes')">Лайки: {{woman.likes[0].likes}}</span>
           <span ng-click="sort_by('likes[0].reposts')">Репосты: {{woman.likes[0].reposts}}</span>

@@ -18,6 +18,7 @@ class Participant
 
   # scope :topreposts, order_by(:likes.reposts => :desc)
   # scope :by_likes_size, order_by('likes_count DESC')
+  default_scope order_by(:vk_id => :desc)
 
   def self.update_from_vk
   	require 'open-uri'
@@ -63,8 +64,8 @@ class Participant
           text = info[i]["text"]
           text = text[/<br>.+?<br>/].gsub("<br>", "").strip if text[/<br>.+?<br>/]
 
-          likes = info[i]["likes"]["count"]
-          reposts = info[i]["reposts"]["count"]
+          likes = info[i]["likes"]["count"].to_i
+          reposts = info[i]["reposts"]["count"].to_i
 
           image_src = []
           attach = info[i]["attachments"]
@@ -75,7 +76,8 @@ class Participant
           end
 
           #city
-          if city_name = text[/я из \S+[\,\.]/]
+          # if city_name = text[/я из \S+[\,\.]/]
+          if city_name = text[/я из \S+\s*\S*[\,\.]/]
             city_name[0..4] = ""
             city_name[-1] = ""
           else

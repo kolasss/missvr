@@ -16,6 +16,27 @@
   %b Enabled:
   = @participant.enabled
 
+%h4 Likes
+%table.table
+  %tr
+    %th date
+    %th Likes
+    %th Reposts
+    %th
+    %th
+
+  - @participant.likes.each do |like|
+    %tr
+      %td= like.created_at
+      %td= like.likes
+      %td= like.reposts
+      %td= link_to 'Edit', edit_polymorphic_path([@participant, like]) 
+      %td= link_to 'Destroy', participant_like_path(@participant, like), :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Like', new_participant_like_path(@participant)
+\|
 = link_to 'Edit', edit_participant_path(@participant)
 \|
 = link_to 'Back', participants_path

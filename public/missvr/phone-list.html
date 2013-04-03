@@ -42,7 +42,6 @@
     <ul class="misses">
       <li ng-repeat="woman in filteredparticipants | orderBy:orderProp | startFrom:currentPage*pageSize | limitTo:pageSize" class="thumbnail">
         <span class="index">{{currentPage*pageSize+$index+1}}</span>
-        <!-- <span class="index">{{currentPage*itemsPerPage+$index+1}}</span> -->
         <div class="photos">
           <div ng-repeat="img in woman.image_src">
             <img class="thumb" ng-src="{{img}}" ng-click="showbig(woman.image_src, $index)">
@@ -51,6 +50,7 @@
         </div>
         <p class="hide">{{woman.vk_id}}</p>
         <p>{{woman.text}}</p>
+        <a href="#{{woman.vk_id}}">VK.com</a>
         <div class="info">
           <span ng-click="sort_by('likes[0].likes')">Лайки: {{woman.likes[0].likes}}</span>
           <span ng-click="sort_by('likes[0].reposts')">Репосты: {{woman.likes[0].reposts}}</span>

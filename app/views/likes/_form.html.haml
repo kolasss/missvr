@@ -1,0 +1,10 @@
+= simple_form_for([@participant, @like]) do |f|
+  / = f.error_notification
+
+  .form-inputs
+    = f.input :likes
+    = f.input :reposts
+    / = f.association :participant
+
+  .form-actions
+    = f.button :submit

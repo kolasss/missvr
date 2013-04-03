@@ -6,7 +6,7 @@ class Participant
   field :text, type: String, :default => ""
   field :enabled, type: Boolean, default: true
 
-  validates :vk_id, uniqueness: true, presence: true
+  validates :vk_id, uniqueness: true, presence: true, :numericality => { :only_integer => true, :greater_than => 0 }
   validates :image_src, presence: true
 
   belongs_to :city

@@ -92,6 +92,7 @@ class Participant
           if !part
             my_city = City.create(vk_name: city_name, name: city_name[0...-1]) if !my_city
             part = Participant.new(vk_id: vk_id, text: text, image_src: image_src)
+            part.enabled = false if image_src.length != 2
             part.city = my_city
             part.save
           end

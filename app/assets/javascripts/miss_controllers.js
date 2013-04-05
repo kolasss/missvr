@@ -83,7 +83,7 @@ function MissListCtrl($scope, $routeParams, $dialog, Miss, City, $filter) {
   };
 
   /*modal with image */
-  var imgt = '<img ng-src="{{img[ind]}}" ng-click="nextimg()">';
+  var imgt = '<shortcut></shortcut><img ng-src="{{img[ind]}}" ng-click="nextImg()">';
 
   $scope.showbig = function(img, ind){
     var d = $dialog.dialog({
@@ -126,14 +126,29 @@ MissListCtrl.$inject = ['$scope', '$routeParams', '$dialog', 'Miss', 'City', '$f
 
 /* controller for modal with big image */
 function ImageModalCtrl($scope, dialog, img, ind) {
-    $scope.img = img;
-    $scope.ind = ind;
-    $scope.nextimg = function(){
-        if ( $scope.ind+1 >= img.length) {
-          $scope.ind = 0;
-        } else {
-          $scope.ind++;
-        }
-    };
+  $scope.img = img;
+  $scope.ind = ind;
+  $scope.nextImg = function(){
+      if ( $scope.ind+1 >= img.length) {
+        $scope.ind = 0;
+      } else {
+        $scope.ind++;
+      }
+  };
+  $scope.prevImg = function(){
+      if ( $scope.ind > 0 ) {
+        $scope.ind--;
+      } else {
+        $scope.ind = img.length-1
+      }
+  };
+
+  $scope.keyPressed = function(e) {
+    if (e.which == 37) {
+      $scope.prevImg();
+    } else if (e.which == 39) {
+      $scope.nextImg();
+    }
+  };
 }
 ImageModalCtrl.$inject = ['$scope', 'dialog', 'img', 'ind'];

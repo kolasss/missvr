@@ -1,19 +1,15 @@
 <div ng:init="$root.pageTitle = 'Мисс Виртуальная Россия'" class="container-fluid">
   <div class="row-fluid">
-      
-      <!-- Search: <input ng-model="query"> -->
+    <!-- Search: <input ng-model="query"> -->
     <div class="pull-right">
       Отсортированно по {{orderName}}
-      <!-- <select ng-model="orderProp">
-        <option value="-likes[0].likes">Likes</option>
-        <option value="-likes[0].reposts">Reposts</option>
-      </select> -->
       <button ng-click="changeOrder()" class="btn btn-mini btn-info orderbtn"><i class="icon-random"></i></button>
       Населенный пункт:
-      <select ng-model="mycity" ng-change="filterByCity()" ng-options="c.name for c in cities" class="cityselect">
-        <option value="">Все</option>
+      <select ui-select2='{width: "element", placeholder: "Все", allowClear:true}' ng-model="mycity" ng-change="filterByCity()" class="cityselect" ng-options="c.name for c in cities" id="citysel">
+        <option></option>
+        <!-- <option data-placeholder value="">Все</option> -->
+        <!-- <option ng-repeat="c in cities" value="{{c}}">{{c.name}}</option> -->
       </select>
-
     </div>
 
     <p class="clearfix">Данные на {{participants[0].likes[0].created_at | date:'dd.MM.yyyy HH:mm'}}</p>
@@ -50,10 +46,10 @@
         </div>
         <!-- <p class="hide">{{woman.vk_id}}</p> -->
         <p>{{woman.text}}</p>
-        <a href="http://vk.com/missvirtualrussia?w=wall-50665538_{{woman.vk_id}}" target="_blank">В контакте</a>
+        <a href="http://vk.com/missvirtualrussia?w=wall-50665538_{{woman.vk_id}}" target="_blank" class="vkbutton">В контакте</a>
         <div class="info">
-          <span ng-click="sort_by('likes[0].likes')">Лайки: {{woman.likes[0].likes}}</span>
-          <span ng-click="sort_by('likes[0].reposts')">Репосты: {{woman.likes[0].reposts}}</span>
+          <span ng-click="sort_by('likes[0].likes')"><i class="icon-heart"></i> {{woman.likes[0].likes}}</span>
+          <span ng-click="sort_by('likes[0].reposts')"><i class="icon-bullhorn"></i> {{woman.likes[0].reposts}}</span>
         </div>
         <!-- <p>{{woman.likes[0].created_at}}</p> -->
         

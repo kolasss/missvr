@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require select2.min.js
+//= require angular.min.js
 //= require angular-resource.min.js
+//= require angular-ui.min.js
 //= require ui-bootstrap-0.2.0.min.js
 //= require_tree .

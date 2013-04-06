@@ -42,6 +42,10 @@
     position:relative;
     border-radius: 0;
     margin-top: 9px;
+
+    p{
+      margin-bottom: 20px;
+    }
   }
 
   .index {
@@ -68,35 +72,37 @@
     bottom: 1em;
     right: 1em;
     position: absolute;
-    padding: 0.1em;
     div {
+      float: left;
+      text-align: center;
+    }
+    .info_wrapper {
       border: 1px solid #ccc ;
       margin-left: 0.8em;
       padding: 0;
-      float: left;
-      //background-color: #66CCFF;
-      background-color: rgb(222, 227, 241);
-      span {
-        //border: 1px solid black;
-        background-color: #F7F7F7;
-        padding: 0.2em 0.4em;
+      background-color: #F7F7F7;
+      .info_icon {
+        background-color: rgb(222, 227, 241);
+        padding: 0.3em 0;
+        width: 50px;
+        //text-align: center;
       }
-      i {
-        margin: 0 0.4em;
+      .info_text {
+        padding: 0.3em 0;
+        width: 50px;
+
       }
     }
   }
 
   .vkbutton {
-    -webkit-user-select: none;
+    //margin-top: 30px;
     background-color: rgb(222, 227, 231);
     border: 1px solid rgb(67, 108, 141);
     color: rgb(47, 88, 121);
     cursor: pointer;
     font-size: 12px;
-    //height: 14px;
-    //line-height: 14px;
-    padding: 4px 8px;
+    padding: 5px 10px;
     text-align: left;
     text-shadow: rgb(255, 255, 255) 0px 1px 0px;
     text-decoration: none;

@@ -2,8 +2,8 @@
   <div class="row-fluid">
     <!-- Search: <input ng-model="query"> -->
     <div class="pull-right">
-      Отсортированно по {{orderName}}
-      <button ng-click="changeOrder()" class="btn btn-mini btn-info orderbtn"><i class="icon-random"></i></button>
+      Отсортировано по {{orderName}}
+      <button ng-click="changeOrder()" class="orderbtn"><i class="icon-random"></i></button>
       Населенный пункт:
       <select ui-select2='{width: "element", placeholder: "Все", allowClear:true}' ng-model="mycity" ng-change="filterByCity()" class="cityselect" ng-options="c.name for c in cities" id="citysel">
         <option></option>

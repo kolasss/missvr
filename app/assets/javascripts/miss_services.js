@@ -12,4 +12,9 @@ angular.module('missServices', ['ngResource'])
     return $resource('cities.json', {}, {
 
     });
+  }])
+  .factory('History', ['$resource', function($resource){
+    return $resource('participants/:partId.json', {}, {
+
+    });
   }]);

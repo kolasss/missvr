@@ -1,0 +1,13 @@
+<div id="loader" ng-show="loading">
+  <img src="/assets/hearts.gif">
+</div>
+<!-- <ul>
+  <li ng-repeat="like in participant.likes">
+    <p>{{like.created_at}}</p>
+    <p>{{like.likes}}</p>
+  </li>
+</ul> -->
+<!-- <gh-visualization val="participant.likes" grouped="grouped"></gh-visualization> -->
+
+<!-- <multiserieslinechart data-tsv="/app/data/multiserieslinechart.tsv"></multiserieslinechart> -->
+<multiserieslinechart likes="participant.likes" data-tsv="participants/515bd1095dffc440dd000004.json"></multiserieslinechart>

@@ -8,6 +8,6 @@ angular.module('missvr', ['missFilters', 'missServices', 'missDirectives', 'ui',
  //  }])
   .config(['$routeProvider', function($routeProvider) {
 	  $routeProvider
-      .when('/', {templateUrl: 'missvr/phone-list.html',   controller: MissListCtrl})
+      .when('/', {templateUrl: 'missvr/part-list.html',   controller: MissListCtrl})
       .otherwise({redirectTo: '/'});
 	}]);

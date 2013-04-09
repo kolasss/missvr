@@ -269,7 +269,7 @@ Version: 3.2 Timestamp: Mon Sep 10 10:38:04 PDT 2012
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: 200px;
+  max-height: 380px;
 }
 
 .select2-results ul.select2-result-sub {

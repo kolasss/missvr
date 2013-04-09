@@ -17,4 +17,5 @@
 //= require angular-resource.min.js
 //= require angular-ui.min.js
 //= require ui-bootstrap-0.2.0.min.js
+//= require d3.v3.min.js
 //= require_tree .

@@ -120,6 +120,24 @@ function MissListCtrl($scope, $routeParams, $dialog, Miss, City, $filter) {
     $scope.numberOfPages();
   };
 
+  /* likes history modal */
+  $scope.showhistory = function(part_id){
+    var d = $dialog.dialog({
+      backdrop: true,
+      keyboard: true,
+      backdropClick: true,
+      // transitionClass: 'fade',
+      // triggerClass: 'in',
+      backdropFade: true,
+      dialogFade: true,
+      controller: 'HistoryModalCtrl',
+      templateUrl:  'missvr/likes-history.html',
+      resolve: {part_id: function(){ return part_id}},
+      dialogClass: 'historymodal'
+    });
+    d.open();
+  };
+
 }
 
 MissListCtrl.$inject = ['$scope', '$routeParams', '$dialog', 'Miss', 'City', '$filter'];
@@ -152,3 +170,13 @@ function ImageModalCtrl($scope, dialog, img, ind) {
   };
 }
 ImageModalCtrl.$inject = ['$scope', 'dialog', 'img', 'ind'];
+
+/* controller for modal with likes history */
+function HistoryModalCtrl($scope, dialog, part_id, History) {
+  $scope.loading = true;
+
+  $scope.participant = History.get({partId: part_id}, function() {
+    $scope.loading = false;
+  });
+}
+HistoryModalCtrl.$inject = ['$scope', 'dialog', 'part_id', 'History'];

@@ -92,6 +92,12 @@
         width: 50px;
 
       }
+      &:hover {
+        background-color: #e7e7e7;
+        .info_icon {
+          background-color: rgb(202, 207, 221);
+        }
+      }
     }
   }
 
@@ -200,10 +206,6 @@ footer {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
-}
-
-.x.axis path {
-  display: none;
 }
 
 .line {

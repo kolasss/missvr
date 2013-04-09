@@ -39,12 +39,6 @@ angular.module('missDirectives', [])
             .append("g")
               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
         }
-
-        // set up initial svg object
-        // var vis = d3.select(element[0])
-        //   .append("svg")
-        //     .attr("width", width)
-        //     .attr("height", height + margin + 100);
             
         scope.$watch('likes', function (newVal, oldVal) {
         
@@ -56,16 +50,6 @@ angular.module('missDirectives', [])
             return;
           }
           
-          // console.log(oldVal)
-          // console.log(newVal)
-
-          // var data_url = attrs['tsv'];
-
-          // var margin = {top: 20, right: 80, bottom: 30, left: 50},
-          //     width = 960 - margin.left - margin.right,
-          //     height = 500 - margin.top - margin.bottom;
-
-          // var parseDate = d3.time.format("%d-%b-%y").parse;
           var parseDate = d3.time.format.utc("%Y-%m-%dT%H:%M:%SZ").parse;
 
           var x = d3.time.scale()
@@ -74,58 +58,110 @@ angular.module('missDirectives', [])
           var y = d3.scale.linear()
               .range([height, 0]);
 
+          var color = d3.scale.category10();
+
+          //custom dates for x axis
+          var customTimeFormat = timeFormat([
+            [d3.time.format("%Y"), function() { return true; }],
+            [d3.time.format("%B"), function(d) { return d.getMonth(); }],
+            [d3.time.format("%e %b"), function(d) { return d.getDate() != 1; }],
+            [d3.time.format("%e %b"), function(d) { return d.getDay() && d.getDate() != 1; }],
+            [d3.time.format("%H:%M"), function(d) { return d.getHours(); }],
+            [d3.time.format("%H:%M"), function(d) { return d.getMinutes(); }],
+            [d3.time.format(":%S"), function(d) { return d.getSeconds(); }],
+            [d3.time.format(".%L"), function(d) { return d.getMilliseconds(); }]
+          ]);
+
+          function timeFormat(formats) {
+            return function(date) {
+              var i = formats.length - 1, f = formats[i];
+              while (!f[1](date)) f = formats[--i];
+              return f[0](date);
+            };
+          }
+
           var xAxis = d3.svg.axis()
               .scale(x)
-              .orient("bottom");
+              .orient("bottom")
+              // .tickFormat(d3.time.format("%e %b %Y"));
+              .tickFormat(customTimeFormat)
+              .ticks(d3.time.days, 1);
 
           var yAxis = d3.svg.axis()
               .scale(y)
               .orient("left");
 
           var line = d3.svg.line()
+              // .interpolate("basis")
               .x(function(d) { return x(d.created_at); })
-              .y(function(d) { return y(d.likes); });
+              .y(function(d) { return y(d.val); });
 
-          // var svg = d3.select("body").append("svg")
-          //     .attr("width", width + margin.left + margin.right)
-          //     .attr("height", height + margin.top + margin.bottom)
-          //   .append("g")
-          //     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+          //our data
+          var data = newVal;
 
-          // d3.tsv(data_url, function(error, data) {
-            var data = newVal;
-            data.forEach(function(d) {
-              // console.log(d);
-              // console.log(d.created_at);
-              // d.created_at = parseDate(d.created_at);
-              console.log(d.created_at);
-              // d.likes = +d.likes;
-              console.log(d.likes);
-            });
+          color.domain(["Лайки", "Репосты"]);
 
-            x.domain(d3.extent(data, function(d) { return d.created_at; }));
-            y.domain(d3.extent(data, function(d) { return d.likes; }));
+          data.forEach(function(d) {
+            d.created_at = parseDate(d.created_at);
+          });
 
-            svg.append("g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(xAxis);
+          var graphs = color.domain().map(function(name) {
+            return {
+              name: name,
+              values: data.map(function(d) {
+                if (name == 'Лайки') {
+                  return {created_at: d.created_at, val: +d.likes};
+                } else {
+                  return {created_at: d.created_at, val: +d.reposts};
+                }
+              })
+            };
+          });
 
-            svg.append("g")
-                .attr("class", "y axis")
-                .call(yAxis)
-              .append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 6)
-                .attr("dy", ".71em")
-                .style("text-anchor", "end")
-                .text("Количество, шт.");
+          x.domain(d3.extent(data, function(d) { return d.created_at; }));
 
-            svg.append("path")
-                .datum(data)
-                .attr("class", "line")
-                .attr("d", line);
-          // });
+          var y_min = d3.min(graphs, function(c) { return d3.min(c.values, function(v) { return v.val; }); }) - 30;
+          if (y_min < 0) {
+            y_min = 0;
+          }
+          y.domain([
+            // d3.min(graphs, function(c) { return d3.min(c.values, function(v) { return v.val; }); }),
+            y_min,
+            d3.max(graphs, function(c) { return d3.max(c.values, function(v) { return v.val; }); }) + 30
+          ]);
+
+          svg.append("g")
+              .attr("class", "x axis")
+              .attr("transform", "translate(0," + height + ")")
+              .call(xAxis);
+
+          svg.append("g")
+              .attr("class", "y axis")
+              .call(yAxis)
+            .append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", 6)
+              .attr("dy", ".71em")
+              .style("text-anchor", "end")
+              .text("Количество, шт.");
+
+          var graph = svg.selectAll(".graph")
+              .data(graphs)
+            .enter().append("g")
+              .attr("class", "graph");
+
+          graph.append("path")
+              .attr("class", "line")
+              .attr("d", function(d) { return line(d.values); })
+              .style("stroke", function(d) { return color(d.name); });
+
+          graph.append("text")
+              .datum(function(d) { return {name: d.name, value: d.values[0]}; })
+              .attr("transform", function(d) { return "translate(" + x(d.value.created_at) + "," + y(d.value.val) + ")"; })
+              .attr("x", 6)
+              .attr("dy", ".35em")
+              .text(function(d) { return d.name; });
+
         }); //end of $watch likes
 
 

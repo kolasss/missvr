@@ -2,8 +2,9 @@
 %html{"ng-app" => "missvr"}
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title{"ng:bind-template" => "{{pageTitle}}"}= content_for?(:title) ? yield(:title) : "Missvr"
-      %meta{:content => content_for?(:description) ? yield(:description) : "Missvr", :name => "description"}
+      %title{"ng:bind-template" => "{{pageTitle}}"}= content_for?(:title) ? yield(:title) : "Мисс Виртуальная Россия"
+      %meta{:name => "keywords", :content => "Мисс Виртуальная Россия 2013, в контакте"}
+      %meta{:content => content_for?(:description) ? yield(:description) : "парсер группы в контакте Мисс Виртуальная Россия", :name => "description"}
         = stylesheet_link_tag "application", :media => "all"
         = javascript_include_tag "application"
         = csrf_meta_tags

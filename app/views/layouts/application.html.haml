@@ -1,6 +1,7 @@
 !!!
 %html{"ng-app" => "missvr"}
   %head
+    = favicon_link_tag "/favicon.ico"
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
       %title{"ng:bind-template" => "{{pageTitle}}"}= content_for?(:title) ? yield(:title) : "Мисс Виртуальная Россия"
       %meta{:name => "keywords", :content => "Мисс Виртуальная Россия 2013, в контакте"}
